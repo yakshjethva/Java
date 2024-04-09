@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class ConditionsDemo {
 	public static void main(String[] args) {
@@ -51,7 +53,21 @@ public class ConditionsDemo {
 			System.out.println("For Loop Demo Interation count: "+ i);
 		}
 		
+		// for-each = 	traversing technique to iterate through the elements in an array/collection
+		//				less steps, more readable
+		//				less flexible
 		
+		//String[] animals = {"cat","dog","rat","bird"};
+		ArrayList<String> animals = new ArrayList<String>();
+		
+		animals.add("cat");
+		animals.add("dog");
+		animals.add("rat");
+		animals.add("bird");
+		
+		for(String i : animals) {
+			System.out.println(i);
+		}
 
 		// while loop = executes a block of code as long as a it's condition remains true
 		Scanner scanner = new Scanner(System.in);
