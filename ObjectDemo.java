@@ -10,6 +10,13 @@ public class ObjectDemo
         this.model = model;
         this.year = year;
     }
+    public ObjectDemo(String brand, String model) {
+        this.brand = brand;
+        this.model = model;
+    }
+    public ObjectDemo(String brand) {
+        this.brand = brand;
+    }
 
     public ObjectDemo() {
         
