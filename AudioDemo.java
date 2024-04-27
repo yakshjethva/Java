@@ -8,7 +8,7 @@ public class AudioDemo {
 	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		
 		Scanner scanner = new Scanner(System.in);
-		File file = new File("Level_Up.wav");
+		File file = new File("assets/sample-3s.wav");
 		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 		Clip clip = AudioSystem.getClip();
 		clip.open(audioStream);
