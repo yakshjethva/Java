@@ -2,7 +2,7 @@ package BasicDemo;
 
 import java.util.Scanner;
 
-public class ATMDemo {
+public class BankingSystem {
     public static void main(String[] args) {
         double balance = 0.0;
         String setPIN;
