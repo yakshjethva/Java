@@ -5,7 +5,11 @@ public class ArrayListDemo{
 	public static void main(String[] args) {
 			
 		// ArrayList = 	a resizable array. Elements can be added and removed after compilation phase store reference data types
-		
+		// Using arrayList we can create the Multidimensional array 
+		// ArrayList is not synchronized | Not thread safe
+		// ArrayList increases its size by 50% 
+
+
 		ArrayList<String> food = new ArrayList<String>();
 		
 		food.add("pizza");
