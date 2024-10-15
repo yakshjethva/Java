@@ -42,7 +42,7 @@ public class GroceryStoreCalculator {
             if (index != -1) {
                 System.out.print("Enter the number of kilograms: ");
                 double kilograms = scanner.nextDouble();
-                scanner.nextLine();  // Consume newline
+                scanner.nextLine();  
 
                 double totalPrice = fruitPrices[index] * kilograms;
                 System.out.println("Total price for " + kilograms + " kg of " + fruitNames[index] + " is: $" + totalPrice);
