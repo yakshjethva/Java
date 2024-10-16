@@ -12,6 +12,8 @@ public class LibraryManagement {
             System.out.println("Enter the name of book " + (i + 1) + ": ");
             bookNames[i] = scanner.nextLine();
         }
+
+		scanner.close();
     }
 
     public void displayBooks() {
@@ -49,6 +51,7 @@ public class LibraryManagement {
                 break;
             }
         }
+		scanner.close();
     }
 
     public void updateBook() {
@@ -82,6 +85,7 @@ public class LibraryManagement {
                 break;
             }
         }
+		scanner.close();
     }
 
     public void displayMenu() {
@@ -112,7 +116,8 @@ public class LibraryManagement {
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
-            }
+				}
+			scanner.close();
         }
     }
 

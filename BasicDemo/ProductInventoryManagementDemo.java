@@ -17,6 +17,8 @@ public class ProductInventoryManagementDemo {
 			productPrices[i] = scanner.nextDouble();
 			scanner.nextLine();  
 		}
+
+		scanner.close();
 	}
 
 	public void displayProducts() {
@@ -50,6 +52,8 @@ public class ProductInventoryManagementDemo {
 			System.out.println("Product not found in inventory.");
 			searchProduct();
 		}
+
+		scanner.close();
 	}
 
 	public static void main(String[] args) {
