@@ -9,7 +9,7 @@ public class SerialDemo {
 		
 		System.out.println("Original Character: " + myCharacter);
 
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./BasicDemo/serialDemo.ser"))) {
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./BasicDemo/JagmeetSerialDemo.ser"))) {
 			out.writeObject(myCharacter);
 			System.out.println("Character saved!");
 		} catch (IOException e) {

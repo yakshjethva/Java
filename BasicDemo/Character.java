@@ -3,6 +3,7 @@ package BasicDemo;
 import java.io.Serializable;
 import java.util.*;
 
+
 class Character implements Serializable {  
     private transient String name;
     private int level;

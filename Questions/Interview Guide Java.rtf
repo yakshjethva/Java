@@ -1,0 +1,1160 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AppleSymbols;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww38200\viewh18660\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Tell me about yourself ?\
+Tell me more about your work experience/Project and what was your role\
+\
+\
+-----------------************ Ususal Flow of interview ************------------------------\
+\
+About yourself -> Modules you worked on -> Spring Security ->DI/IoC -> SpringBoot Annotations -> REST\
+-> Java 8 Features -> Streams vs collections (map,flatmap) -> collections (HashMap : Async,ThreadSafe, Class as key)\
+-> Optional Class  -> MultiThreading/ Thread-Safety -> Asynchronous\
+\
+\
+-> Profiles/Enviorment -> Junit (How to create object,how to test static methods)\
+-> MicroServices/RabbitMQ (queue persistency) -> CI/CD/Jenkins -> Containers -> NoSQL\
+-> Agile, Scrum Ceremonies\
+\
+\
+\
+					Topics\
+____________________________________________________________________________________________________________\
+*********************************** Spring MVC ********************************************************\
+____________________________________________________________________________________________________________\
+\
+The DispatcherServlet is the front controller in Spring web applications. It's used to create web applications \
+and REST services in Spring MVC. In a traditional Spring web application, this servlet is defined in the web.xml file.\
+\
+Web.XML is where we create/define servlets and map them including front controller in spring MVC.\
+This file is also called deployment descriptor.\
+\
+\
+Spring MVC request Flow:\
+http req -> Goes to dispatcher Servlet -> Hit the Controller/Handler Mapping (Get/Post) at provided URI ->\
+Model (Involves Business Logic) -> add attributes to modelAndView -> return View Name -> back to dispatcher servlert\
+->  Spring uses View Resolver to get View -> View is sent back\
+* In SpringBoot, View Resolver is defined in application.properties (spring.mvc.view.prefix=web/inf/etc, spring.mvc.view.suffix=.jsp)\
+* In Spring MVC - a config class is created which extends WebMvcConfigurerAdapter, which have method configureViewResolver,\
+   this method is used to set viee prefix,suffix etc using InterViewResolver\
+\
+\
+Q : What is Front Controller\
+A front controller is defined as a controller that handles all requests for a Web Application.\
+DispatcherServlet servlet is the front controller in Spring MVC that intercepts every request and then dispatches \
+requests to an appropriate controller. \
+\
+ \
+____________________________________________________________________________________________________________\
+*********************************** Spring Security ********************************************************\
+____________________________________________________________________________________________________________\
+\
+Spring Security :-> Part of Spring Project for Authentication and Autherization\
+\
+Flow of Request :-> hits config class WebSecurityConfig extends WebSecurityConfigurerAdapter -> void configure method (http)\
+			uses diff filters to authenticate/authorize request\
+\
+\
+WebSecurityConfig extends WebSecurityConfigurerAdapter :-> \
+		This classhas a configure method which accept the http request, and then we can pipline multiple\
+		methods to autenticate/authrize the request. (some methods : authenticate(),authorizeRequests(),antMathers(), anyRequest(),hasAnyRole(),FormLogin(),PermitAll())\
+		\
+class override configure (httpSecurity http), configure(AuthenticationManagerBuilder auth) and PasswordEncoder() methods.\
+In auth config method, we call userDetailsService method which return instance of our userDetailsServiceImpl then .passwordEncoder called on this service-Class.  \
+\
+UserDetails :-> is and interface, simply store user information which is later encapsulated into authentication\
+                objects, This allows non-security realted user information to be stored in convenient location. \
+		(methods : getUserName(), getAuthorities(), account related methods expired/locked etc )\
+\
+UserDetailsService :-> The UserDetailsService is a core interface in Spring Security framework, which is used to\
+ 			retrieve the user\'92s authentication and authorization information. It has a single read-only\
+		        method named as loadUserByUsername() which locate the user based on the username.\
+\
+\
+\
+\
+\
+------------  Topic Questions ----------- \
+Q : What is Spring security ?\
+Q : What is flow of login request ? \
+Q : How roles are configured in your application ?\
+\
+\
+____________________________________________________________________________________________________________\
+*************************************** DI / IoC ***********************************************************  \
+____________________________________________________________________________________________________________\
+_______ \
+IoC :->  is a principle by which the control of the object/dependencies is transferred to a framework, in case of spring , \
+_______  its passed to spring cotainer. It makes code loosely coupled.\
+\
+_______\
+DI  :->   is a design pattern through which IoC is implemented.this deals with how components get hold of their dependencies.\
+_______   Two Types of dependecy injections are:\
+		1: Contrsutcor injection\
+		2: Setter Injection\
+\
+\
+Contructor Injection :->  Uses constructor to inject dependency. Enforce mandatory dependencies: \
+			  This is in-line with POJO constructor golden rule; mandatory dependencies are best to be declared and initialized in constructor method\
+\
+\
+Setter DI :->   Uses setter method to inject dependency. Partial Dependency is possible. \
+		If we want to pass info for only 1 property. It Override the Constructor injection.\
+Value can be easily changed by setter injection. its more flwxible than constructor injection\
+\
+\
+Drwaback Of Setter Injection-> \
+If Object A and B are dependent each other i.e A is depends ob B and vice-versa. Spring throws ObjectCurrentlyInCreationException \
+while creating objects of A and B bcz A object cannot be created until B is created and vice-versa\
+\
+If you use setter injection, the setter may or may not be called, so the instance may never be provided with its dependency. \
+The only way to force the setter to be called is using @Required\
+\
+\
+\
+----------------Topic Questions --------------\
+Q : Bean Factory vs Application Context\
+Q : How many ways to inject Dependency\
+Q : Which one you prefer and why\
+Q : Why Bean is used with methods\
+\
+\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ SpringBoot Annotations ************************************************\
+____________________________________________________________________________________________________________\
+\
+@SpringBootApplication : \
+This annotation is used to mark a configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning.\
+It's same as declaring a class with @Configuration, @EnableAutoConfiguration and @ComponentScan annotations. \
+\
+\
+@Controller :->\
+This is a class-level annotation, which is put on top of your controller class.\
+It is a specialization of @Component and is autodetected through classpath scanning.\
+This annotation is used to make a class as a web controller, which can handle client requests and send a response back to the client.\
+\
+By default, Handler methods in Controller return view name, we can use @responseBody to write value to body of response.\
+\
+@RestController :->\
+It is a combination of @Controller and @ResponseBody annotation. \
+@ResponseBody annotation in a controller to write data to the body of the response object.\
+\
+It made development of RESTful web sevices easier.the fundamental difference between a web     \
+application and a REST API is that the response from a web application is generally view \
+(HTML + CSS + JavaScript)  because they are intended for human viewers while REST API just returns\
+data in form of JSON or XML because most of the REST clients are programs. \
+\
+Use @Controller if we want to return a Data with View, use @RestController if we just want to return data in response body.\
+\
+@Component :->\
+A stereotype annotation to mark a class which will be picked by spring container during classpath scan.\
+\
+@Service :->\
+Specialized form of Component which denotes the class which contains Businees Logic\
+\
+\
+@RequestMapping	:  \
+To map a particular request to a particular method. It provides a URI for upcoming requests.We can use it to create the base URI. \
+To map a particular request to  class or method. then we determine type of request using requestMethod.get etc\
+\
+@RequestBody\
+This annotation is used to annotate request handler method arguments.This is used to convert the body of the HTTP request\
+to the java class object with the aid of selected HTTP message converter. This annotation will be used\
+in the method parameter and the body of the http request will be mapped to that method parameter.\
+ \
+@ResponseBody :\
+@ResponseBody is a Spring annotation which binds a method return value to the web response body. It is not interpreted as a view name.\
+This annotation is used to add the return value to the body of the HTTP response with the aid of selected HTTP message converter. \
+For example,  produces ="application/xml" will produce the java object as xml (or Json response).\
+\
+\
+\
+@RequestParam	: \
+It extract value from query string, It is used to bind HTTP parameters into method arguments of handler methods. \
+For example someone send form with some values like String Name, String LasName, then these values can be fetched in controller from query String.\
+e.g. public String display(@RequestParam("name") String name,@RequestParam("pass") String pass) \
+\
+@PathVariable:\
+This annotation is used to annotate request handler method arguments. It extracts value from uri path\
+URI like users/\{id\}, here id can be passed as parameter/Argument in hander methods (methodName (@PathVariable int id ) ) \
+\
+While @RequestParams extract values from the query string, @PathVariables extrct values from the URI path:\
+ \
+\
+\
+Spring Container Managing Spring Beans :->\
+First, and most important - all Spring beans are managed by spring container - they "live" inside a container, called "application context".\
+@Autowired and @Inject only work on classes annotated as @Component or its subclasses, such as @Service.\
+When Spring starts up and scans the class path for these classes, it looks for instances of classes, also known as beans, that can match. \
+These are based on classes and interfaces, or the names of the beans.\
+\
+\
+BeanFactory vs application context :->\
+Both are IoC container. application Context was built on top of bean factory.\
+Bean Factory  :  support lazy loading. only intsantiate bean when we call getBean(). doesn't support annotations.\
+Application Context : Aggresive loading, create singleton bean when app load. support annontations. \
+\
+\
+\
+-------------------- Topic  Questions --------------\
+Q : Diff between controller and RestController\
+Q : How Component is different from Service, are these interchangable\
+Q : Bean Scopes ? How can we define bean scopes\
+Q : What happens when you autowire?\
+Q : Diff between RequestParam and PathVariable\
+\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************   Rest API     ********************************************************\
+____________________________________________________________________________________________________________\
+\
+Rest is an Architectural style which enables stateless client server communication, works over http protocol and make use of \
+http methods like get,post,put, delete to access or modify data.\
+\
+When compared to SOAP web services, these are lightweight and doesn\'92t follow any standard. \
+We can use XML, JSON, text or any other type of data for request and response.\
+\
+\
+ResponseEntity :->\
+ResponseEntity represents an HTTP response, including headers, body, and status. While @ResponseBody puts the \
+return value into the body of the response, ResponseEntity also allows us to add headers and status code.\
+\
+\
+@GetMapping 	   : used for mapping HTTP GET requests onto specific handler methods to get resources.\
+@PostMapping       : It submits information to the service for processing; it should typically return the modified or new resource\
+@PutMapping        : At the request URL it update the existing resource, if no resource exists it will create new resource.\
+@DeleteMapping     :  To delete the Data at specific URI\
+\
+			\
+				Difference between PUT and POST?\
+PUT puts a file or resource at a particular URI and exactly at that URI. \
+If there is no resource or file there, PUT makes one, it changes/modify the existing file/resource. \
+\
+POST sends data to a particular URI and expects the resource at that URI to deal with the \
+request. The web server at this point can decide what to do with the data in the context of specified resource\
+\
+PUT is idempotent meaning, invoking it any number of times will not have an impact on resources.\
+POST is not idempotent, meaning if you invoke POST multiple times it keeps creating more resources\
+\
+\
+\
+				Some key characteristics of REST includes\
+REST is stateless, therefore the SERVER has no state (or session data)\
+With a well-applied REST API, the server could be restarted between two calls as every data is passed to the server\
+Web service mostly uses POST method to make operations, whereas REST uses GET to access resources\
+\
+				Some of the advantages of REST web services are:\
+Learning curve is easy since it works on HTTP protocol\
+Supports multiple technologies for data transfer such as text, xml, json, image etc.\
+REST is a lightweight protocol, REST methods can be tested easily over browser.\
+\
+				Disadvantages of REST web services?\
+Since it works on HTTP, there can\'92t be asynchronous calls.\
+Sessions can\'92t be maintained.\
+\
+\
+\
+------------------------ Topic  Questions--------------\
+Q 1 : What you mean by stateless\
+Q 2 : diff between Put and Post\
+Q 3 : can put be used instead of post ?\
+Q 4 : Which http method require ResquestBody\
+\
+\
+Q 5 : How to define types of Consume/Produce \
+A   :  @GetMapping(value = "", produces/consumes = MediaType.APPLICATION_JSON_VALUE)\
+			Or\
+	@Produces("application/xml")\
+\
+Q 6 : How to set header in request/ response \
+we can use setHeader method of httpServletResponse.\
+In @RestController, @ModelAttribute method : response.setHeader("Cache-Control", "no-cache");\
+//2nd Way\
+Using Response Entity -> ResponseEntity.headers(HttpHeaders headers).body("Success")   (This method return responseEntity).\
+\
+\
+_________________________________________________________________________________________________________________\
+************************************ Java 8 -Functional InterFace, "STREAMS"  ***********************************\
+_________________________________________________________________________________________________________________\
+Lambda Expression : \
+Lambda Expression is an anonymous function which accepts a set of input parameters and returns results.\
+Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.\
+\
+\
+Functional Interface :->\
+An interface with just one abstract method is called a functional interface.  \
+A functional interface can contain default and static methods which do have an implementation, in addition to the single unimplemented method.\
+\
+@FunctionalInterface is used to annotate a functional interface.In that case, the compiler will verify if the interface actually contains just one abstract method or not. \
+If a method accepts a functional interface, then you can pass a lambda expression to it.\
+Example :-> Supplier, Consumer, and Predicate (Careful : Runnable, Callable, Comparator, and Comparable)\
+\
+Predicate: It takes an Object and returns a boolean. It is used in several Stream methods \
+	   like filter(), which uses Predicate to filter unwanted elements.\
+Supplier : doesn't take any argument and return an object of type T. This means you can use it anytime you need an object.\
+Consumer : represents an operation that accepts a single input argument and returns no result.\
+\
+\
+\
+Streams ->\
+Stream is feature introduced in Java 8, Streams are used to process the sequence of Data (it needs a source to fetch data from, mostly collection is converted into Streams),\
+and Stream API have many intermediate methods which can be piplined to process the data (filter,map, flatmap), Terminate methods can be used to collect the results.\
+\
+Imp. Points :->\
+-> It is used to process the Data, It does not hold the values.\
+-> Stream does not store elements. It simply conveys elements from a source such as a data structure, \
+   an array, or an I/O channel, through a pipeline of computational operations.\
+\
+\
+\
+			Difference between Collection and Stream?\
+The main difference between a Collection and Stream is that Collection contains their elements, \
+but Stream doesn't. Stream work on a view where elements are actually stored by Collection \
+or array, but unlike other views, any change made on Stream doesn't reflect on the original Collection.\
+\
+\
+Filter:\
+The filter method is used to filter elements that satisfy a certain condition that is specified using a Predicate function.\
+A predicate function is nothing but a function that takes an Object and returns a boolean. For example, if you have a List \
+of Integer and you want a list of even integers or :\
+e.g. : Stream<String> longNames = allNames.filter(str -> str.length() > 6);\
+\
+Map:\
+Stream map(Function mapper) returns a stream consisting of the results of applying the given function to the elements of this stream.\
+Stream map(Function mapper) is an intermediate operation. These operations are always lazy. \
+list.stream().map(number -> number * 3).forEach(System.out::println);\
+\
+FlatMap:\
+The flatmap function is an extension of the map function. Apart from transforming one object into another, it can also flatten it.\
+The objects are combined from all the collections in the original Stream.\
+For example, if you have a list of the list but you want to combine all elements of lists into just one list. In this case, you can use flatMap() for flattening.\
+At the same time, you can also transform an object like you do use map() function.\
+e.g. : List<Integer> listOfAllIntegers = listOfLists.stream() .flatMap(x -> x.stream()).collect(Collectors.toList());\
+\
+\
+parallel Stream: \
+A parallel stream can parallel execute stream processing tasks. For example, \
+if you have a parallel stream of 1 million orders and you are looking for orders worth more than 1 million, then you can use a filter to do that.\
+Unlike sequential Stream, the parallel Stream can launch multiple threads to search for \
+those orders on the different part of Stream and then combine the result.\
+\
+\
+\
+Difference between intermediate and terminal operations on Stream? \
+The intermediate Stream operation returns another Stream, which means you can further call other methods of \
+Stream class to compose a pipeline.\
+For example after calling map() or flatMap() you can still call filter() method on Stream.\
+On the other hand, the terminal operation produces a result other than Streams like a value or a Collection.\
+Once a terminal method like forEach() or collect() is called, you cannot call any other method of Stream or reuse the Stream.\
+\
+What do you mean by saying Stream is lazy?\
+When we say Stream is lazy, we mean that most of the methods defined on Java .util.stream.Stream class is lazy \
+i.e. they will not work by just including them on Stream pipeline.\
+They only work when you call a terminal method on the Stream and finish as soon as \
+they find the data they are looking for rather than scanning through the whole set of data.\
+\
+Difference between the findFirst() and findAny() method? \
+The findFirst() method will return the first element meeting the criterion i.e. Predicate, \
+while the findAny() method will return any element meeting the criterion, \
+very useful while working with a parallel stream.\
+\
+\
+\
+When do we go for Java 8 Stream API? Why do we need to use Java 8 Stream API in our projects?\
+When our Java project wants to perform the following operations, it\'92s better to use Java 8 Stream API to get lot of benefits:\
+\
+When we want perform Database like Operations. For instance, we want perform groupby operation, orderby operation etc.\
+When want to Perform operations Lazily.\
+When we want to write Functional Style programming.\
+When we want to perform Parallel Operations.\
+When want to use Internal Iteration\
+When we want to perform Pipelining operations.\
+When we want to achieve better performance.\
+\
+\
+\
+---------------------- Topic  Questions ------------------------\
+Q : What are some functional interfaces you are aware of ?\
+Q : What are Streams ? How these are diff from Collections ?\
+Q : Why use streams when we have foreach method ?\
+Q : Diff between map and flatMap, filter ?\
+Q : When streams should be used over traditional DS, Is it faster than collection\
+Q : What do you mean by saying Stream is lazy?\
+Q : Diff between FindFirst and FindAny\
+Q : What is ParallelStream, when to use\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ HashMap, HashSet, TreeMap *********************************************\
+____________________________________________________________________________________________________________\
+\
+HashMap :->\
+\
+It is an associative DS which store the values in key-value formation.Key must be unique.\
+When created, initially it create 16 buckets (Node) which are basically LinkedList. \
+Each node contains 4 informations : Key, Value, HashCode , NextNode\
+\
+When storing Value, Hash(key) is performed, it returns hashcode and a modular operation \
+(hash & n-1) is done to calculate the index.When 2 entries have same index,  \
+Equals method is used to check that 2 objects are equal or not. ... HashMap uses equals() \
+to compare the key (hash(key) or hashcode) whether the are equal or not. If equals() method return true,\
+they are equal otherwise not equal\
+\
+When key is "null", value goes to 0th Node. put and get are 2 HashMap specific methods\
+Only 1 null key is allowed, mulitple null values allowed.\
+\
+HashCode and Equals are used in any Hash implementation\
+From Java 8, When there are more than 8 items/elements in a Node(at any given index),\
+bucket/Node switches from LinkedList to BalancedTree (worst case improved from O(n) to O(log n))\
+\
+\
+HashMap quick recap :\
+Stores Value in Key Value Pair,  each element has its corresponding key which is required for its retrieval during iteration.\
+Store unique keys but duplicate values allowed\
+Non-Synchronized\
+Not Thread Safe  (can't be shared between many threads without proper synchronization)\
+Allow 1 Null Key, by default foes to 0th index\
+put mehtod()\
+Due to unique key, its faster in retrieval\
+\
+\
+\
+HashSet :->\
+only store objects (no key value pairs)\
+Stores only Unique value\
+Not Synchronized, Not Thread Safe\
+Internally uses Hashmap\
+add method()\
+Slower than Hasmap\
+Allow 1 Null Value in collection\
+\
+\
+HashTable\
+Synchronized, Thread Safe\
+No null value allowed\
+\
+\
+TreeMap :->\
+Stores values in sequential order\
+\
+\
+----------------------- Topic  Questions -------------------------\
+Q : How Hashamap works internally ?\
+Q : 2 methods HashMap uses internally ?\
+Q : Is Hasmap Async, ThreadSafe >\
+Q : Can we use Class as Key in HashMap , if so what is the condition ?\
+Q : Diff between HashMap, HashSet,TreeMap, HashTable ?\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Optional Class, Comparator, Comparable ********************************\
+____________________________________________________________________________________________________________\
+\
+Optional Class :->\
+\
+An Optional is essentially a container and final Class introduced in Java 8.\
+\
+Optional is a container type for a value which may be absent.\
+It can contain either one value or zero value.  If it contains a value, we can get it. Otherwise, we get null.\
+\
+It is a bounded collection that is it contains at most one element only. It is an alternative to the \'93null\'94 value.\
+\
+Main Advantage of Optional is:\
+It is used to avoid null checks.\
+It is used to avoid \'93NullPointerException\'94.\
+\
+\
+			Methods\
+.Empty() ->  It's kind of like an empty container which returns an empty instance of Optional.\
+.of(Object) -> The first approach to creating Optionals is using the .of() method, passing a reference to a non-null object. If the object was null, the method .of() would throw a NullPointerException.\
+.ofNullable(Object) -> If Object is allowed to be a null, instead of the .of() method, we'd use the .ofNullable() method. They perform the same if the value is non-null. \
+.ifPresent() -> To check if the value is present inside an Optional, we use the .isPresent() method. This is essentially a replacement for the null-check of the old days.\
+.isEmpty() -> Another way to check for a value is to use .isEmpty(). \
+.get() - to get the element from optional\
+\
+\
+Comparator :->\
+Comparator is external to the element type we are comparing. It\'92s a separate class. We create multiple separate classes (that implement Comparator) \
+to compare by different members.Collections class has a second sort() method and it takes Comparator. The sort() method invokes the compare() to sort objects.\
+\
+The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.\
+Comparator doesn't affect the original class, i.e., the actual class is not modified.\
+Comparator provides compare() method to sort elements\
+int Compare(Object a, Object b) (return a.getId - b.getId ;)\
+\
+\
+\
+Comparable :->\
+A comparable object is capable of comparing itself with another object. The class itself must implements the Comparable interface to compare its instances.\
+It has compareTo() method which accept an argument of same Class type, then it compare that passed object with this object, and return int. \
+\
+Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price.\
+Comparable affects the original class, i.e., the actual class is modified.\
+Not preferred when have no access to original class and we want sorting on more than 1 parameter.\
+int compareTo(Object a) \{return this.getId - a.getId() ;\}\
+\
+\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What is Optional Class, when should i use it ?\
+Q : What are metods inside optioanl class\
+Q : How to retrive value from optional class\
+Q : When should i use comparable and comparator\
+Q : Which one have compareTo method ?\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Multi - Threading ***************************************\
+____________________________________________________________________________________________________________\
+\
+Runnable :->\
+Java runnable is an interface used to execute code on a concurrent thread. It is an interface which is \
+implemented by any class if we want that the instances of that class should be executed by a thread.\
+The runnable interface has an undefined method run() with void as return type, and it takes in no arguments. \
+\
+\
+Thread :->\
+A thread is a single sequential flow of control within a program.\
+It can be created by extending the Thread class and overriding its run() method.\
+If the class implements the Runnable interface, the thread can be run by passing an instance of the \
+class to a Thread object's constructor and then calling the thread's start() method.\
+\
+\
+Process vs Thread :->\
+A program in execution is often referred as process. A thread is a subset(part) of the process.\
+A process consists of multiple threads. A thread is a smallest part of the process that can \
+execute concurrently with other parts(threads) of the process.\
+-> A thread can communicate with other thread (of the same process) directly by \
+using methods like wait(), notify(), notifyAll(). A process can communicate with other process by using inter-process communication\
+\
+\
+"Synchronized" :->\
+A synchronized block in Java can only be executed a single thread at a time (depending on how you use it). \
+Java synchronized blocks can thus be used to avoid race conditions.\
+\
+Synchronized blocks in Java are marked with the synchronized keyword. A synchronized block \
+in Java is synchronized on some object. All synchronized blocks synchronized on the same \
+object can only have one thread executing inside them at the same time. All other threads \
+attempting to enter the synchronized block are blocked until the thread inside the \
+synchronized block exits the block.\
+\
+\
+wait() : It tells the calling thread to give up the lock and go to sleep until some other thread enters the same monitor and calls notify()\
+notify() : t wakes up one single thread that called wait() on the same object.\
+notifyAll() : It wakes up all the threads that called wait() on the same object.\
+sleep : Put thread on sleep for a fixed time (in milliseconds)\
+\
+Thread-Safety :->\
+In a multithreaded environment, multiple threads might try to modify the same resource. \
+If threads aren't managed properly, this will, of course, lead to consistency issues.\
+\
+thread-safety or thread-safe code in Java refers to code which can safely be used or shared in concurrent or \
+multi-threading environment and they will behave as expected. any code, class, or object which can behave\
+differently from its contract on the concurrent environment is not thread-safe.\
+Synchronization is the process of allowing only one thread at a time to complete the particular task. \
+It means when multiple threads executing simultaneously, and want to access the same resource at the same time, \
+then the problem of inconsistency will 	occur. so synchronization is used to resolve inconsistency problem by allowing only\
+one thread at a time. Synchronization uses a synchronized keyword. \
+\
+\
+Singleton class in a multithreading environment :->\
+A thread safe singleton in created so that singleton property is maintained even in multithreaded environment. \
+To make a singleton class thread-safe, getInstance() method is made synchronized so that multiple threads can\'92t access it simultaneously.\
+Constructor is made private, class have a private static classType variable and a static method is made with synchronized keyword, \
+which check if instance is null, new instance created and returned.\
+\
+private static ClassName instance; \
+synchronized public static ClassName getInstance()  \
+  \{  if (instance == null)  \
+    \{     instance = new ClassName(); \} \
+    return instance; \} \
+\
+\
+DeadLock :->\
+Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. \
+Deadlock occurs when multiple threads need the same locks but obtain them in different order.\
+				Or\
+Deadlock can occur in a situation when a thread is waiting for an object lock, that is acquired by another thread \
+and second thread is waiting for an object lock that is acquired by first thread.\
+\
+\
+How To avoid DeadLock:\
+A : Avoid nested Locks\
+    Avoid Unnecessary Locks\
+    Using Thread.join() :  If your thread has to wait for another thread to finish, it's always best to use join with the maximum time you want to wait for the thread to finish.\
+\
+--------------------Topic  Questions--------------\
+Q : What is Thread Safety ?\
+Q : How to make a class/method/statemenet Thread Safe (immutable, synchronized) ?\
+Q : What is synchronized ? \
+Q : What is deadlock ?\
+Q : How to make a class singleton ?\
+Q : How threads communicate with each other ?\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Asynchronous Prog - CompletableFuture ***************************************\
+____________________________________________________________________________________________________________\
+\
+Synchronous -:>\
+Execute code in order, remaining code have to wait unless above code is executed\
+\
+Asynchronous :-> means non-blocking\
+If a method/part of code is idle, taking too long, or waiting for response from some other api/method,\
+then remaining code can be exectuted, control can be passed to code/method next in line .\
+\
+\
+CompletableFuture :->\
+CompletableFuture is used for asynchronous programming in Java. Asynchronous programming is a means of writing non-blocking code by running a task on a separate thread \
+than the main application thread and notifying the main thread about its progress, completion, or failure.\
+It has methods like runAsync, supplyAsync, thenApply, thenAccept.\
+\
+Future was used for Async programming as well but there was no way that task would notify us back once task is completed.\
+we could use isDone() method but that again would block the code and make flow synchronous\
+\
+\
+.suplyAsync() implements Supplier interface, creates new thread in the thread pool and returns a value of a parameterized type.\
+if you want the result from the background task and do some transformations on it, one simply can do it using supplyAsync method\
+CompletableFuture.supplyAsync(() -> "Hello") -> supply a completableFuture result\
+e.g. -> CompletableFuture.supplyAsync(() -> doSomething());\
+e.g. -> CompletableFuture.supplyAsync(() -> "8").thenApplyAsync(v -> \{ return "Java " + v; \});\
+\
+\
+.thenApply () -> \
+This is a callback function,We can use this method to work with a result of the previous call\
+but this task is performed in same thread of supplyAsync(), for seperate thread, we can use thenApplyAsync().\
+\
+.thenAccept() ->\
+\
+.runAsync() -> runAsync implements Runnable interface, creates new thread and not allows to return a value.\
+In some scenario we might need to fire the function and the result of the function call is not used in the current function. \
+This can be achieved using CompletableFuture\'92s runAsync .\
+\
+allOf() ->\
+As the name suggests, allOf is used when you want a list of tasks to be completed before you move ahead.\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What is CompletableFuture, why did we need it ?\
+Q : How did we get notified after the task completion ?\
+Q : Diff between Future, Completable Future ?\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Profiles/Enviorment ***************************************\
+____________________________________________________________________________________________________________\
+\
+Profile :->\
+A profile is a set of configuration settings. Spring Boot allows to define profile specific property files \
+in the form of application-\{profile\}.properties. It automatically loads the properties in an application.\
+\
+The @Profile annotation indicates that a component is eligible for registration when the \
+specified profile or profiles are active. The default profile is called default; all the \
+beans that do not have a profile set belong to this profile.\
+\
+The keys in the profile-specific property override the ones in the master property file.\
+\
+\
+\
+------------------------ Topic  Questions ------------------------------\
+Q : How we create multiple profiles ?\
+Q : Why we create multiple profiles ? Where we keep profile specific settings/Configurations ?\
+Q : How do we activate profile ? like i don't want swagger for prod, how do i enable that?\
+Q : How many profiles we can create in SpringBoot\
+\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Junit/Mockito *********************************************************\
+____________________________________________________________________________________________________________\
+Example Link : https://levelup.gitconnected.com/using-mockito-for-unit-testing-96a74f3ed2a5\
+\
+Unit testing : The concept of unit testing is to test only one class/unit in a test class.\
+		Each unit test should have 3 A -> Arrange, Act , Assert\
+\
+-> When our class have dependencies on other classes then we can create mock of those classes (using @mock) and\
+   for any variable/method from that class make use of any() .  \
+\
+method in real class:   if (bookRepo.existsByIbanId(book.getIbanId())) \{\
+            		throw new CustomException(); \}\
+\
+Test e.g. 		when (userRepo.existById(any())).thenReturn(true)	//mocking\
+			assertThrows(CustomException.class , () -> userService.saveUser()); \
+\
+\
+-> when i want to check if my code reached a certain line or not, i can use verify() \
+e.g. : verify(userRepo).save(user);\
+\
+\
+\
+\
+Testing :->\
+Testing is the process of checking the functionality of an application to ensure it runs as per requirements. \
+Unit testing comes into picture at the developers\'92 level; it is the testing of single entity (class or method).\
+\
+Stub :->\
+Stubbing, like mocking, means creating a stand-in, but a stub only mocks the behavior, but not the entire object. \
+This is used when your implementation only interacts with a certain behavior of the object.\
+\
+A stub is a fake class that comes with preprogrammed return values. \
+A typical stub is a database connection that allows you to mimic any scenario without having a real database.\
+\
+\
+Mock :->\
+A mock is a fake class that can be examined after the test is finished for its interactions \
+with the class under test. For example, you can ask it whether a method was called or \
+how many times it was called.\
+e.g. :->\
+EntityManager entityManager = mock(EntityManager.class); \
+when(entityManager.find(Customer.class,1L)).thenReturn(sampleCustomer);\
+The class under test is then annotated with the @InjectMocks annotation.\
+Here EM is dependency that interact with db, so we mock it , sm is intialized and populated in test class.\
+\
+\
+Junit :->\
+JUnit is a unit testing framework for Java programming language. It plays a crucial role test-driven development\
+\
+Imp. Notes :\
+JUnit is an open source framework, which is used for writing and running tests.\
+Provides annotations to identify test methods.\
+Provides assertions for testing expected results.\
+Provides test runners for running tests.\
+JUnit tests can be organized into test suites containing test cases and even other test suites.\
+\
+To Test:\
+Intialize class you want to test\
+Mark Testing method with @Test.\
+Use assertEquals(expectedValue, ClassName.Method(parameters)).\
+//Static Variable/Method\
+Static imports are a Java feature that allows fields and methods defined in a class as public \
+static to be used without specifying the class in which the field is defined.\
+\
+\
+Mockito :->\
+Mocking is the act of removing external dependencies from a unit test in order to create \
+a controlled environment around it. Typically, we mock all other classes that interact with the class that we want to test\
+\
+Mocks are useful if you have a dependency on an external system, file reading takes too long, \
+the database connection is unreliable, or if you don\'92t want to send an email after every test.\
+\
+Use Cases :\
+Database connections,\
+Web services,\
+Classes that are slow,\
+\
+\
+Mockito offers two equivalent ways of mocking:\
+-> Using static methods and\
+-> Using @Mock annotations.\
+\
+\
+PowerMock :->\
+With PowerMockito it is possible to mock all the hard cases that Mockito does not support. \
+Most of the time this means mocking of static methods. But it is also possible to mock \
+private methods and constructor calls\
+\
+list of classes that needs to be mocked must be given using the @PrepareForTest annotation.\
+\
+\
+\
+---------------------------Topic  Questions-----------------------------\
+Q : Which Junit version you used ? What is testing level ?\
+Q : If i need object of another class to test my class, how do i get that object ?\
+Q : How do i test static, private methods amd exceptions ? \
+\
+\
+Imp Links:\
+https://semaphoreci.com/community/tutorials/stubbing-and-mocking-with-mockito-2-and-junit\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Git/Jenkins - Workflow *******************************************************\
+____________________________________________________________________________________________________________\
+\
+When story is assigned, i create new branch/sub-branch with Story id -> clone/copy/pull the code to local ->\
+make the changes ->push code to my branch -> create pull request for main, add reviewres -> once approved -> \
+goes to main branch -> build by jenkins and deployed in QA enviorment (weekly)\
+\
+I can login to Jenkins, can see the logs, build reports\
+\
+\
+Git commands\
+\
+Git clone repo-URL	-> to clone/copy the existing code from a remote repo\
+Git branch newBranch 	-> create new branch locally\
+git push -u remote branchName -> to push code to remote branch\
+git branch 		-> to view branches\
+git branch -d branchName -> to delete the branch\
+git checkout BranchName -> to switch branches\
+git checkout -b BranchName -> create new branch and switch to that branch\
+git status 		-> info about the ccurrent branch\
+git add .		-> add changes to next commit\
+\
+git commit - m "Commit message " - > create a checkpoint in dev process.\
+git push remote branchName -> after commiting, this command push the changes to repo\
+git pull -> pull the updates from the repotte repo\
+\
+\
+git log--oneline -> give us list of commits, which we can revert back to\
+git revert HashCodeOfCommit -> undo the given commit, create a new one without deleting older one\
+\
+\
+// Merging to main branch\
+git checkout dev 	-> switch to dev branch\
+git fetch 		-> update loacl branch\
+git merge branch-Name	-> merge featurebranch into dev\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ CI/CD - Jenkins *******************************************************\
+____________________________________________________________________________________________________________\
+\
+CI/CD :->\
+Continuous Integration is a development practice in which the developers are required to commit changes to \
+the source code in a shared repository several times a day or more frequently. Every commit made in the \
+repository is then built. This allows the teams to detect the problems early. Apart from this, depending \
+on the Continuous Integration tool, there are several other functions like deploying the build application \
+on the test server, providing the concerned teams with the build and test results, etc.\
+\
+\
+Jenkins :->\
+Jenkins is an open-source automation tool written in Java with plugins built for Continuous Integration purposes.\
+Jenkins is used to build and test your software projects continuously making it easier for developers to \
+integrate changes to the project, and making it easier for users to obtain a fresh build.\
+\
+Developers know the test result of every commit made in the source code on the run.\
+You only need to commit changes to the source code and Jenkins will automate the rest of the process for you.\
+\
+\
+//process of Jenkins.\
+First, a developer commits the code to the source code repository. Meanwhile, the Jenkins server checks the repository at regular intervals for changes.\
+Soon after a commit occurs, the Jenkins server detects the changes that have occurred in the source code repository. \
+Jenkins will pull those changes and will start preparing a new build.\
+If the build fails, then the concerned team will be notified.\
+If the build is successful, then Jenkins deploys the build in the test server.\
+After testing, Jenkins generates feedback and then notifies the developers about the build and test results.\
+It will continue to check the source code repository for changes made in the source code and the whole process keeps on repeating.\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What is CI/CD ?\
+Q : Have your used any CI/CD Tool ?\
+Q : what is Pipleline, how do we create that ?\
+Q : How do we run the build reports , How will i know if build was a success ?\
+Q : What are hooks/Polling ?\
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ MicroService / RebbitMQ ***********************************************\
+____________________________________________________________________________________________________________\
+\
+MicroService :->\
+Components of MicroService Architecture :->\
+\
+Api GateWay :->\
+Service Discovery :->\
+\
+------------------------- Topic  Questions --------------------\
+Q : MicroService Architecture ?\
+Q : Are Queus in RabbitMQ persistent, suppose consumer service restarting, will message in queue will be lost ?\
+Q : How MicroServices communicate with each other ? \
+\
+\
+\
+____________________________________________________________________________________________________________\
+************************************ Containers - Docker, Kubernetes ***************************************\
+____________________________________________________________________________________________________________\
+\
+Docker :-> contaonerization tool , contain all enviorment related info we need to run our app\
+Docker Hub :-> thats where we keep the image of our configurations\
+Image :-> contains dockerFile , which have all the info we need to create container\
+\
+Kubernetes :->\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What is a Contaianer , what is Docker ? \
+Q : When we use it ? What is docker File, What is Image ?\
+\
+\
+\
+___________________________________________________________________________________________________________\
+************************************ NoSQL -MongoDB *******************************************************\
+____________________________________________________________________________________________________________\
+\
+NoSQL :->\
+NoSQL databases are non tabular, non-relational, and store data differently than relational tables. \
+NoSQL databases come in a variety of types based on their data model. The main types are document, Key-Value pairs \
+NoSQL databases can store relationship data\'97they just store it differently than relational databases do.\
+NoSQL data models allow related data to be nested within a single data structure.\
+\
+\
+Document: databases store data in documents similar to JSON (JavaScript Object Notation) objects. Each document \
+contains pairs of fields and values. The values can typically be a variety of types including things \
+like strings, numbers, booleans, arrays, or objects\
+e.g. : MongoDB\
+\
+Key-value databases:\
+are a simpler type of database where each item contains keys and values. A value can typically only be retrieved \
+by referencing its key\
+e.g. : Redis, DynamoDB\
+\
+\
+Collection:\
+A collection is simply a grouping of documents that have the same or a similar purpose. \
+A collection acts similarly to a table in a traditional SQL database.\
+\
+_id field is reserved for primary key in mongodb, and that should be a unique value. \
+\
+MongoDB quesries :\
+db.collection.find(query, projection)\
+db.COLLECTION_NAME.find()\
+db.mycol.insert([  \{Json Object \} ]) ;\
+db.mycol.find(\{"likes": \{$gt:10\}, $or: [\{"by": "tutorials point"\},\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What are colletions ?\
+Q : How to write Query in NoSQL, How to run parametrized query\
+\
+\
+\
+\
+___________________________________________________________________________________________________________\
+************************************ Agile Ceremonies *****************************************************\
+____________________________________________________________________________________________________________\
+\
+What is Agile :->\
+Agile is a term used to describe approaches to software development emphasizing incremental delivery, team collaboration, continual planning, and continual learning\
+\
+\
+Sprint cermonies followed in our company are :\
+Sprint Planning 	:->  It is done in beginning of the sprint, our sprint is usually 3 weeks so this meething is around 3 hrs long (1 or 2 hrs per week)\
+Daily Scrum      	:->  Daily Stand up meeting around scrum board, usually 15 minutes long, discuss daily task , progress and if have any questions.\
+Sprint Review    	:->  Done by QA and they tested the story fully- usually 3 hrs (1 hr per weekSumm3r), get feedback from product owner\
+Sprint Retrospective	:->  final ceremony to discuss the way sprint was done and what could be done to improve (2 to 3 hrs)\
+\
+Another ceremony is Backlog grooming - product backlog refinement\
+\
+\
+User stories are created by scrum master and broken down into points, then our Team Lead assign us story and time based on our prev experince.\
+We use Scrum borad to track Sprints and progress\
+Jira Confluence is wiki for product or team workspace where kowledge and collabration meet\
+\
+\
+--------------------Topic  Questions--------------\
+Q : What are Agile Ceremonies your company permform\
+Q : How long are your sprints ? How often in minor deployment (every 3 weeks), major deployment(every 3 months) ?\
+Q : How long are planning meeting, Standup meeting, demo meeting, retrospective meeting\
+Q : Which tools you use (Scrum Board)\
+\
+\
+_________________________________________________________________________________________________________________\
+************************************ Design Patterns ***********************************\
+_________________________________________________________________________________________________________________\
+\
+Singleton :->\
+\
+Problem\
+
+\f1 \uc0\u10625 
+\f0 	Only a single instance should be created for a class.\
+
+\f1 \uc0\u10625 
+\f0 	The class must provide global access to the instance of the class.\
+\
+Examples\
+
+\f1 \uc0\u10625 
+\f0 	Logger - Log files are created by logger class object. Multiple client applications can use same logger object to write into one log file.\
+
+\f1 \uc0\u10625 
+\f0 	Cache\
+
+\f1 \uc0\u10625 
+\f0 	Configuration file\
+\
+Solution\
+
+\f1 \uc0\u10625 
+\f0 	Final class to prevent inheritance.\
+
+\f1 \uc0\u10625 
+\f0 	Private constructor to restrict instantiation of the class from other classes.\
+
+\f1 \uc0\u10625 
+\f0 	Private static variable of the same class that is the only instance of the class.\
+
+\f1 \uc0\u10625 
+\f0 	Public static method that returns the instance of the class. This is the global access point to get the instance of the class.\
+
+\f1 \uc0\u10625 
+\f0 	Check if the static class variable is null, if so create a new object and store as the static variable.\
+
+\f1 \uc0\u10625 
+\f0 	Keep the object creation under a synchronized block for multithreaded environment with double locking.\
+\
+\
+\
+Factory :->\
+\
+Problem\
+
+\f1 \uc0\u10625 
+\f0 	Create objects without having to specify the exact class of the object that has to be created. \
+
+\f1 \uc0\u10625 
+\f0 	Used in scenarios with superclass and multiple sub classes, and based on input one sub-class object needs to be returned.\
+
+\f1 \uc0\u10625 
+\f0 	No beforehand knowledge of exact type and dependencies of the object.\
+\
+Examples\
+
+\f1 \uc0\u10625 
+\f0 	java.util.Calendar\
+
+\f1 \uc0\u10625 
+\f0 	NumberFormat\
+
+\f1 \uc0\u10625 
+\f0 	valueOf() method in wrapper classes like Boolean, Integer etc\
+\
+\
+Solution\
+
+\f1 \uc0\u10625 
+\f0 	Replace direct object construction calls using new oeprator with calls to a factory method.\
+
+\f1 \uc0\u10625 
+\f0 	Define parent class as abstract with abstract methods.\
+
+\f1 \uc0\u10625 
+\f0 	Define a factory class for parent\
+
+\f1 \uc0\u10625 
+\f0 	Define a static method in parent which takes input params and create appropriate object with new operator.\
+
+\f1 \uc0\u10625 
+\f0 	The client class should call the factory instead of the new operator to get the object.\
+\
+\
+Abstract Factory :->\
+\
+Same as Factory, but used in scenarios where the child classes have further child classes. So all classes with child should have a corresponding factory class. So the abstract factory is a factory of factories.\
+\
+\
+Builder :->\
+\
+Problem\
+
+\f1 \uc0\u10625 
+\f0 	Too many arguments to pass from client program to create new object - type and order of arguments\
+
+\f1 \uc0\u10625 
+\f0 	Some of the parameters might be optional, but still needs to be sent as null.\
+
+\f1 \uc0\u10625 
+\f0 	Nested arguments.\
+\
+Examples\
+
+\f1 \uc0\u10625 
+\f0 	java.lang.StringBuilder\
+
+\f1 \uc0\u10625 
+\f0 	java.lang.StringBuffer\
+\
+Solution\
+
+\f1 \uc0\u10625 
+\f0 	Create a static nested class and then copy all arguments from outer class to the builder class.\
+
+\f1 \uc0\u10625 
+\f0 	If the class name is Vehicle, then the builder class should be named VehicleBuilder.\
+
+\f1 \uc0\u10625 
+\f0 	The builder class should have a public constructor with required attributes as parameters.\
+
+\f1 \uc0\u10625 
+\f0 	The builder class should have methods to set the optional parameters and it should return the same builder objects after setting the optional attribute.\
+
+\f1 \uc0\u10625 
+\f0 	Create a build() in the builder class that will return the object of the main class. For this the main class should have a private constructor with builder class as argument.\
+
+\f1 \uc0\u10625 
+\f0 	The client class should call the builder class constructor, setters and build method to create the object.\
+\
+\
+Prototype :->\
+\
+Problem\
+
+\f1 \uc0\u10625 
+\f0 	Object creation is a costly affair and requires a lot of time and resources and you have a similar object already existing.\
+\
+Solution\
+
+\f1 \uc0\u10625 
+\f0 	Prototype pattern provides a mechanism to copy the original objkect to a new object and then modify it according to our needs. Uses java cloning to copy the object.\
+
+\f1 \uc0\u10625 
+\f0 	The class should inplement Cloneable interface.\
+
+\f1 \uc0\u10625 
+\f0 	Create first object and load data.\
+
+\f1 \uc0\u10625 
+\f0 	For new object, clone the first object.\
+
+\f1 \uc0\u10625 
+\f0 	Modify the new object as needed and use.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
