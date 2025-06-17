@@ -1,0 +1,1424 @@
+/Users/yaksh/Downloads/Rest-API-Spring-boot-main/docker_compose.yml /Users/yaksh/Downloads/Rest-API-Spring-boot-main/Dockerfile1. Filter even numbers:
+
+List<Integer> evens = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());
+
+
+2. Map to squares:
+
+List<Integer> squares = numbers.stream().map(n -> n * n).collect(Collectors.toList());
+
+
+3. Sum of numbers:
+
+int sum = numbers.stream().mapToInt(Integer::intValue).sum();
+
+
+4. Find maximum:
+
+Optional<Integer> max = numbers.stream().max(Integer::compare);
+
+
+5. Find minimum:
+
+Optional<Integer> min = numbers.stream().min(Integer::compare);
+
+
+6. Count elements:
+
+long count = numbers.stream().count();
+
+
+7. Distinct elements:
+
+List<Integer> distinct = numbers.stream().distinct().collect(Collectors.toList());
+
+
+8. Sort ascending:
+
+List<Integer> sorted = numbers.stream().sorted().collect(Collectors.toList());
+
+
+9. Sort descending:
+
+List<Integer> sortedDesc = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+
+10. Limit results:
+
+List<Integer> limited = numbers.stream().limit(5).collect(Collectors.toList());
+
+
+11. Skip elements:
+
+List<Integer> skipped = numbers.stream().skip(3).collect(Collectors.toList());
+
+
+12. Any match:
+
+boolean hasEven = numbers.stream().anyMatch(n -> n % 2 == 0);
+
+
+13. All match:
+
+boolean allPositive = numbers.stream().allMatch(n -> n > 0);
+
+
+14. None match:
+
+boolean noNegatives = numbers.stream().noneMatch(n -> n < 0);
+
+
+15. Find first:
+
+Optional<Integer> firstEven = numbers.stream().filter(n -> n % 2 == 0).findFirst();
+
+
+16. Find any:
+
+Optional<Integer> anyEven = numbers.stream().filter(n -> n % 2 == 0).findAny();
+
+
+17. Reduce to sum:
+
+Optional<Integer> sumReduce = numbers.stream().reduce(Integer::sum);
+
+
+18. Reduce with identity:
+
+int sumReduceId = numbers.stream().reduce(0, Integer::sum);
+
+
+19. Join strings:
+
+String joined = strings.stream().collect(Collectors.joining(", "));
+
+
+20. Group by length:
+
+Map<Integer, List<String>> byLength = strings.stream().collect(Collectors.groupingBy(String::length));
+
+
+21. Partition by condition:
+
+Map<Boolean, List<String>> partitioned = strings.stream()
+    .collect(Collectors.partitioningBy(s -> s.length() > 5));
+
+
+22. Average of numbers:
+
+OptionalDouble avg = numbers.stream().mapToInt(Integer::intValue).average();
+
+
+23. Sum with collector:
+
+int sumCollect = numbers.stream().collect(Collectors.summingInt(Integer::intValue));
+
+
+24. Statistics:
+
+IntSummaryStatistics stats = numbers.stream().mapToInt(Integer::intValue).summaryStatistics();
+
+
+25. Map to uppercase:
+
+List<String> upper = strings.stream().map(String::toUpperCase).collect(Collectors.toList());
+
+
+26. FlatMap lists:
+
+List<Integer> flattened = listOfLists.stream().flatMap(List::stream).collect(Collectors.toList());
+
+
+27. Concatenate streams:
+
+Stream<Integer> concatenated = Stream.concat(stream1, stream2);
+
+
+28. Generate infinite stream:
+
+Stream<Integer> infinite = Stream.iterate(0, i -> i + 1);
+
+
+29. Generate random numbers:
+
+Stream<Double> randoms = Stream.generate(Math::random);
+
+
+30. Peek elements:
+
+List<Integer> peeked = numbers.stream().peek(System.out::println).collect(Collectors.toList());
+
+
+31. Map to object:
+
+List<Person> persons = names.stream().map(name -> new Person(name)).collect(Collectors.toList());
+
+
+32. Filter non-null:
+
+List<String> nonNull = strings.stream().filter(Objects::nonNull).collect(Collectors.toList());
+
+
+33. To array:
+
+Integer[] array = numbers.stream().toArray(Integer[]::new);
+
+
+34. ForEach ordered:
+
+numbers.stream().forEachOrdered(System.out::println);
+
+
+35. Custom comparator sort:
+
+List<String> sortedCustom = strings.stream()
+    .sorted((s1, s2) -> s1.length() - s2.length())
+    .collect(Collectors.toList());
+
+
+36. Map to length:
+
+List<Integer> lengths = strings.stream().map(String::length).collect(Collectors.toList());
+
+
+37. Filter by index:
+
+List<String> filteredByIndex = IntStream.range(0, strings.size())
+    .filter(i -> i % 2 == 0)
+    .mapToObj(strings::get)
+    .collect(Collectors.toList());
+
+
+38. Zip two lists:
+
+List<String> zipped = IntStream.range(0, Math.min(list1.size(), list2.size()))
+    .mapToObj(i -> list1.get(i) + "-" + list2.get(i))
+    .collect(Collectors.toList());
+
+
+39. Range of numbers:
+
+List<Integer> range = IntStream.range(1, 10).boxed().collect(Collectors.toList());
+
+
+40. Range closed:
+
+List<Integer> rangeClosed = IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
+
+
+41. Map to entry:
+
+Map<String, Integer> map = strings.stream()
+    .collect(Collectors.toMap(Function.identity(), String::length));
+
+
+42. Group by first character:
+
+Map<Character, List<String>> byFirstChar = strings.stream()
+    .collect(Collectors.groupingBy(s -> s.charAt(0)));
+
+
+43. Counting collector:
+
+long countCollect = strings.stream().collect(Collectors.counting());
+
+
+44. Summing collector:
+
+int sumCollector = numbers.stream().collect(Collectors.summingInt(Integer::intValue));
+
+
+45. Averaging collector:
+
+double avgCollector = numbers.stream().collect(Collectors.averagingInt(Integer::intValue));
+
+
+46. Max by collector:
+
+Optional<String> maxByLength = strings.stream()
+    .collect(Collectors.maxBy(Comparator.comparingInt(String::length)));
+
+
+47. Min by collector:
+
+Optional<String> minByLength = strings.stream()
+    .collect(Collectors.minBy(Comparator.comparingInt(String::length)));
+
+
+48. Mapping collector:
+
+List<Integer> lengthsCollector = strings.stream()
+    .collect(Collectors.mapping(String::length, Collectors.toList()));
+
+
+49. Reducing collector:
+
+Optional<String> concat = strings.stream()
+    .collect(Collectors.reducing((s1, s2) -> s1 + ", " + s2));
+
+
+50. Joining with prefix/suffix:
+
+String joinedWithPrefix = strings.stream()
+    .collect(Collectors.joining(", ", "[", "]"));
+
+
+## Intermediate Operations (51-100)
+
+51. Filter and map:
+
+List<String> evenSquares = numbers.stream()
+    .filter(n -> n % 2 == 0)
+    .map(n -> n * n)
+    .map(Object::toString)
+    .collect(Collectors.toList());
+
+
+52. Chained filters:
+
+List<Integer> filtered = numbers.stream()
+    .filter(n -> n > 0)
+    .filter(n -> n % 2 == 0)
+    .filter(n -> n < 100)
+    .collect(Collectors.toList());
+
+
+53. Sorted then limit:
+
+List<Integer> top3 = numbers.stream()
+    .sorted(Comparator.reverseOrder())
+    .limit(3)
+    .collect(Collectors.toList());
+
+
+54. Distinct then sorted:
+
+List<Integer> uniqueSorted = numbers.stream()
+    .distinct()
+    .sorted()
+    .collect(Collectors.toList());
+
+
+55. Skip then limit (pagination):
+
+List<Integer> page = numbers.stream()
+    .skip(20)
+    .limit(10)
+    .collect(Collectors.toList());
+
+
+56. FlatMap to characters:
+
+List<Character> chars = strings.stream()
+    .flatMap(s -> s.chars().mapToObj(c -> (char)c))
+    .collect(Collectors.toList());
+
+
+57. Nested stream operations:
+
+List<String> result = strings.stream()
+    .map(String::toUpperCase)
+    .filter(s -> s.length() > 3)
+    .sorted()
+    .distinct()
+    .collect(Collectors.toList());
+
+
+58. Take while (Java 9+):
+
+List<Integer> taken = numbers.stream()
+    .takeWhile(n -> n < 5)
+    .collect(Collectors.toList());
+
+
+59. Drop while (Java 9+):
+
+List<Integer> dropped = numbers.stream()
+    .dropWhile(n -> n < 5)
+    .collect(Collectors.toList());
+
+
+60. Iterate with predicate (Java 9+):
+
+List<Integer> iterated = Stream.iterate(0, n -> n < 100, n -> n + 5)
+    .collect(Collectors.toList());
+
+
+61. Map multi-value return:
+
+List<Integer> flattened = numbers.stream()
+    .flatMap(n -> Stream.of(n, n*2, n*3))
+    .collect(Collectors.toList());
+
+
+62. Filter and map to different type:
+
+List<String> evenStrings = numbers.stream()
+    .filter(n -> n % 2 == 0)
+    .map(n -> "Number " + n)
+    .collect(Collectors.toList());
+
+
+63. Stream of optionals to values:
+
+List<String> present = optionals.stream()
+    .flatMap(Optional::stream)
+    .collect(Collectors.toList());
+
+
+64. Generate stream from array:
+
+Stream<Integer> arrayStream = Arrays.stream(numbersArray);
+
+
+65. Stream from string chars:
+
+List<Character> charList = "hello".chars()
+    .mapToObj(c -> (char)c)
+    .collect(Collectors.toList());
+
+
+66. Stream from string lines:
+
+List<String> lines = multilineString.lines().collect(Collectors.toList());
+
+
+67. Stream from regex matches:
+
+List<String> words = Pattern.compile("\\w+").matcher(text)
+    .results()
+    .map(MatchResult::group)
+    .collect(Collectors.toList());
+
+
+68. Stream from files:
+
+List<String> fileLines = Files.lines(Paths.get("file.txt"))
+    .collect(Collectors.toList());
+
+
+69. Stream from directory listing:
+
+List<Path> files = Files.list(Paths.get("."))
+    .filter(Files::isRegularFile)
+    .collect(Collectors.toList());
+
+
+70. Stream from zip file:
+
+List<String> zipEntries = new ZipFile("archive.zip").stream()
+    .map(ZipEntry::getName)
+    .collect(Collectors.toList());
+
+
+71. Stream from properties:
+
+List<String> propertyNames = properties.stringPropertyNames().stream()
+    .collect(Collectors.toList());
+
+
+72. Stream from enumeration:
+
+List<String> enumNames = Collections.list(enumeration).stream()
+    .map(Object::toString)
+    .collect(Collectors.toList());
+
+
+73. Stream from iterator:
+
+List<String> iterated = StreamSupport.stream(
+    Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED), false)
+    .collect(Collectors.toList());
+
+
+74. Stream from spliterator:
+
+List<String> split = StreamSupport.stream(spliterator, false)
+    .collect(Collectors.toList());
+
+
+75. Stream builder:
+
+List<String> built = Stream.<String>builder()
+    .add("one")
+    .add("two")
+    .add("three")
+    .build()
+    .collect(Collectors.toList());
+
+
+76. Stream concat multiple:
+
+Stream<Integer> combined = Stream.concat(
+    Stream.concat(stream1, stream2), stream3);
+
+
+77. Empty stream:
+
+Stream<String> empty = Stream.empty();
+
+
+78. Stream of nullable:
+
+Stream<String> nullableStream = Stream.ofNullable(maybeNull);
+
+
+79. Stream of varargs:
+
+Stream<Integer> varargs = Stream.of(1, 2, 3, 4, 5);
+
+
+80. Parallel stream:
+
+List<Integer> parallelProcessed = numbers.parallelStream()
+    .map(n -> n * 2)
+    .collect(Collectors.toList());
+
+
+81. Sequential stream from parallel:
+
+List<Integer> sequential = numbers.parallelStream()
+    .sequential()
+    .map(n -> n * 2)
+    .collect(Collectors.toList());
+
+
+82. Unordered stream:
+
+List<Integer> unordered = numbers.stream()
+    .unordered()
+    .collect(Collectors.toList());
+
+
+83. Stream with custom spliterator:
+
+List<Integer> custom = StreamSupport.stream(new CustomSpliterator(), false)
+    .collect(Collectors.toList());
+
+
+84. Stream from BufferedReader:
+
+List<String> readerLines = new BufferedReader(reader).lines()
+    .collect(Collectors.toList());
+
+
+85. Stream from JAR file:
+
+List<String> jarEntries = new JarFile("lib.jar").stream()
+    .map(JarEntry::getName)
+    .collect(Collectors.toList());
+
+
+86. Stream from ResultSet:
+
+List<String> resultSetData = StreamSupport.stream(
+    new Spliterators.AbstractSpliterator<String>(
+        Long.MAX_VALUE, Spliterator.ORDERED) {
+        public boolean tryAdvance(Consumer<? super String> action) {
+            try {
+                if (!resultSet.next()) return false;
+                action.accept(resultSet.getString(1));
+                return true;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }, false).collect(Collectors.toList());
+
+
+87. Stream from Process output:
+
+List<String> processOutput = new BufferedReader(
+    new InputStreamReader(process.getInputStream())).lines()
+    .collect(Collectors.toList());
+
+
+88. Stream from DOM nodes:
+
+List<String> nodeNames = StreamSupport.stream(
+    Spliterators.spliteratorUnknownSize(
+        document.getElementsByTagName("div").iterator(), 
+        Spliterator.ORDERED), false)
+    .map(Node::getNodeName)
+    .collect(Collectors.toList());
+
+
+89. Stream from XPath:
+
+List<String> xpathResults = StreamSupport.stream(
+    ((Iterable<Node>)() -> (Iterator<Node>)xpath.evaluate(
+        "//div", document, XPathConstants.NODESET)))
+    .map(Node::getTextContent)
+    .collect(Collectors.toList());
+
+
+90. Stream from JSON array:
+
+List<String> jsonValues = StreamSupport.stream(
+    jsonArray.spliterator(), false)
+    .map(JsonValue::toString)
+    .collect(Collectors.toList());
+
+
+91. Stream from CSV:
+
+List<String[]> csvLines = new CSVReader(reader).readAll().stream()
+    .collect(Collectors.toList());
+
+
+92. Stream from random ints:
+
+List<Integer> randInts = new Random().ints(10, 0, 100)
+    .boxed()
+    .collect(Collectors.toList());
+
+
+93. Stream from random longs:
+
+List<Long> randLongs = new Random().longs(10)
+    .boxed()
+    .collect(Collectors.toList());
+
+
+94. Stream from random doubles:
+
+List<Double> randDoubles = new Random().doubles(10)
+    .boxed()
+    .collect(Collectors.toList());
+
+
+95. Stream from bitset:
+
+List<Integer> setBits = IntStream.range(0, bitSet.length())
+    .filter(bitSet::get)
+    .boxed()
+    .collect(Collectors.toList());
+
+
+96. Stream from stack:
+
+List<String> stackElements = Stream.generate(stack::pop)
+    .limit(stack.size())
+    .collect(Collectors.toList());
+
+
+97. Stream from queue:
+
+List<String> queueElements = Stream.generate(queue::poll)
+    .limit(queue.size())
+    .collect(Collectors.toList());
+
+
+98. Stream from blocking queue:
+
+List<String> blockingQueueElements = Stream.generate(() -> {
+        try {
+            return blockingQueue.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    })
+    .limit(blockingQueue.size())
+    .collect(Collectors.toList());
+
+
+99. Stream from tokenizer:
+
+List<String> tokens = StreamSupport.stream(
+    Spliterators.spliteratorUnknownSize(
+        new StringTokenizer(text, " ").asIterator(), 
+        Spliterator.ORDERED), false)
+    .map(Object::toString)
+    .collect(Collectors.toList());
+
+
+100. Stream from scanner:
+
+List<String> scannerTokens = Stream.generate(scanner::next)
+    .limit(10)
+    .collect(Collectors.toList());
+
+
+## Advanced Operations (101-150)
+
+101. Grouping by multiple fields:
+
+Map<String, Map<Integer, List<Person>>> multiLevelGroup = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, 
+        Collectors.groupingBy(Person::getAge)));
+
+
+102. Grouping with counting:
+
+Map<String, Long> countByCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, Collectors.counting()));
+
+
+103. Grouping with summing:
+
+Map<String, Integer> sumAgesByCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, 
+        Collectors.summingInt(Person::getAge)));
+
+
+104. Grouping with averaging:
+
+Map<String, Double> avgAgeByCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, 
+        Collectors.averagingInt(Person::getAge)));
+
+
+105. Grouping with mapping:
+
+Map<String, Set<String>> namesByCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, 
+        Collectors.mapping(Person::getName, Collectors.toSet())));
+
+
+106. Grouping with reducing:
+
+Map<String, Optional<Person>> oldestByCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity, 
+        Collectors.reducing((p1, p2) -> p1.getAge() > p2.getAge() ? p1 : p2)));
+
+
+107. Partitioning with counting:
+
+Map<Boolean, Long> partitionCount = persons.stream()
+    .collect(Collectors.partitioningBy(p -> p.getAge() >= 18, 
+        Collectors.counting()));
+
+
+108. Partitioning with grouping:
+
+Map<Boolean, Map<String, List<Person>>> partitionAndGroup = persons.stream()
+    .collect(Collectors.partitioningBy(p -> p.getAge() >= 18, 
+        Collectors.groupingBy(Person::getCity)));
+
+
+109. Collecting and then:
+
+List<String> unmodifiable = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+
+
+110. Teeing collector (Java 12+):
+
+Map<String, Object> stats = persons.stream()
+    .collect(Collectors.teeing(
+        Collectors.averagingInt(Person::getAge),
+        Collectors.counting(),
+        (avg, count) -> Map.of("average", avg, "count", count)
+    ));
+
+
+111. Custom collector:
+
+List<String> customCollect = persons.stream()
+    .collect(ArrayList::new, 
+        (list, person) -> list.add(person.getName()), 
+        ArrayList::addAll);
+
+
+112. To concurrent map:
+
+ConcurrentMap<String, Integer> concurrentMap = persons.stream()
+    .collect(Collectors.toConcurrentMap(Person::getName, Person::getAge));
+
+
+113. Grouping concurrent:
+
+ConcurrentMap<String, List<Person>> concurrentGroup = persons.parallelStream()
+    .collect(Collectors.groupingByConcurrent(Person::getCity));
+
+
+114. To unmodifiable list (Java 10+):
+
+List<String> unmodifiableList = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.toUnmodifiableList());
+
+
+115. To unmodifiable set (Java 10+):
+
+Set<String> unmodifiableSet = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.toUnmodifiableSet());
+
+
+116. To unmodifiable map (Java 10+):
+
+Map<String, Integer> unmodifiableMap = persons.stream()
+    .collect(Collectors.toUnmodifiableMap(Person::getName, Person::getAge));
+
+
+117. Joining with collector:
+
+String joinedNames = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.joining(", ", "Names: ", "."));
+
+
+118. Filtering collector (Java 9+):
+
+List<String> filteredNames = persons.stream()
+    .collect(Collectors.filtering(
+        p -> p.getAge() > 18,
+        Collectors.mapping(Person::getName, Collectors.toList())
+    ));
+
+
+119. FlatMapping collector (Java 9+):
+
+List<String> hobbies = persons.stream()
+    .collect(Collectors.flatMapping(
+        p -> p.getHobbies().stream(),
+        Collectors.toList()
+    ));
+
+
+120. Multi-level reduction:
+
+Optional<Person> oldest = persons.stream()
+    .collect(Collectors.reducing((p1, p2) -> 
+        p1.getAge() > p2.getAge() ? p1 : p2));
+
+
+121. Complex downstream collector:
+
+Map<String, IntSummaryStatistics> ageStatsByCity = persons.stream()
+    .collect(Collectors.groupingBy(
+        Person::getCity,
+        Collectors.summarizingInt(Person::getAge)
+    ));
+
+
+122. Collecting to TreeSet:
+
+TreeSet<String> sortedNames = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.toCollection(TreeSet::new));
+
+
+123. Collecting to EnumSet:
+
+EnumSet<DayOfWeek> days = Stream.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY)
+    .collect(Collectors.toCollection(() -> EnumSet.noneOf(DayOfWeek.class)));
+
+
+124. Collecting to map with merge function:
+
+Map<String, Integer> nameToAge = persons.stream()
+    .collect(Collectors.toMap(
+        Person::getName,
+        Person::getAge,
+        (age1, age2) -> age1 > age2 ? age1 : age2
+    ));
+
+
+125. Collecting to map with supplier:
+
+TreeMap<String, Integer> treeMap = persons.stream()
+    .collect(Collectors.toMap(
+        Person::getName,
+        Person::getAge,
+        (age1, age2) -> age1,
+        TreeMap::new
+    ));
+
+
+126. Collecting to map from entries:
+
+Map<String, Integer> mapFromEntries = Stream.of(
+    Map.entry("a", 1),
+    Map.entry("b", 2)
+).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+
+127. Collecting to immutable map:
+
+Map<String, Integer> immutableMap = persons.stream()
+    .collect(Collectors.collectingAndThen(
+        Collectors.toMap(Person::getName, Person::getAge),
+        Collections::unmodifiableMap
+    ));
+
+
+128. Collecting to sorted map:
+
+Map<String, Integer> sortedMap = persons.stream()
+    .sorted(Comparator.comparing(Person::getName))
+    .collect(Collectors.toMap(
+        Person::getName,
+        Person::getAge,
+        (oldVal, newVal) -> oldVal,
+        LinkedHashMap::new
+    ));
+
+
+129. Collecting to map with null checks:
+
+Map<String, Integer> safeMap = persons.stream()
+    .filter(p -> p.getName() != null)
+    .collect(Collectors.toMap(
+        Person::getName,
+        Person::getAge
+    ));
+
+
+130. Collecting to bimap (Guava):
+
+BiMap<String, Integer> biMap = persons.stream()
+    .collect(Collectors.toMap(
+        Person::getName,
+        Person::getAge,
+        (v1, v2) -> { throw new IllegalStateException(); },
+        HashBiMap::create
+    ));
+
+
+131. Collecting to multimap (Guava):
+
+ListMultimap<String, Integer> multimap = persons.stream()
+    .collect(Collectors.toMap(
+        Person::getCity,
+        Person::getAge,
+        (v1, v2) -> v1,
+        () -> ArrayListMultimap.create()
+    ));
+
+
+132. Collecting to table (Guava):
+
+Table<String, String, Integer> table = persons.stream()
+    .collect(Collectors.toMap(
+        p -> Tables.immutableCell(p.getCity(), p.getName()),
+        Person::getAge,
+        (v1, v2) -> v1,
+        () -> HashBasedTable.create()
+    ));
+
+
+133. Collecting to graph (JGraphT):
+
+Graph<String, DefaultEdge> graph = persons.stream()
+    .collect(Collectors.toCollection(() -> {
+        Graph<String, DefaultEdge> g = new DefaultUndirectedGraph<>(DefaultEdge.class);
+        persons.forEach(p -> g.addVertex(p.getName()));
+        return g;
+    }));
+
+
+134. Collecting to custom collection:
+
+Collection<String> collected = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.toCollection(LinkedList::new));
+
+
+135. Collecting to array:
+
+Person[] array = persons.stream().toArray(Person[]::new);
+
+
+136. Collecting to string array:
+
+String[] names = persons.stream()
+    .map(Person::getName)
+    .toArray(String[]::new);
+
+
+137. Collecting to primitive array:
+
+int[] ages = persons.stream()
+    .mapToInt(Person::getAge)
+    .toArray();
+
+
+138. Collecting to optional:
+
+Optional<String> maxName = persons.stream()
+    .map(Person::getName)
+    .max(Comparator.naturalOrder());
+
+
+139. Collecting to optional int:
+
+OptionalInt maxAge = persons.stream()
+    .mapToInt(Person::getAge)
+    .max();
+
+
+140. Collecting to optional double:
+
+OptionalDouble avgAge = persons.stream()
+    .mapToInt(Person::getAge)
+    .average();
+
+
+141. Collecting to optional long:
+
+OptionalLong count = persons.stream()
+    .mapToLong(p -> 1L)
+    .reduce(Long::sum);
+
+
+142. Collecting to future:
+
+CompletableFuture<List<String>> futureNames = CompletableFuture.supplyAsync(() ->
+    persons.stream()
+        .map(Person::getName)
+        .collect(Collectors.toList())
+);
+
+
+143. Collecting to completable future:
+
+CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+    persons.stream()
+        .map(p -> CompletableFuture.runAsync(() -> process(p)))
+        .toArray(CompletableFuture[]::new)
+);
+
+
+144. Collecting to stream:
+
+Stream<String> nameStream = persons.stream()
+    .map(Person::getName);
+
+
+145. Collecting to iterator:
+
+Iterator<String> nameIterator = persons.stream()
+    .map(Person::getName)
+    .iterator();
+
+
+146. Collecting to spliterator:
+
+Spliterator<String> nameSpliterator = persons.stream()
+    .map(Person::getName)
+    .spliterator();
+
+
+147. Collecting to enumeration:
+
+Enumeration<String> nameEnumeration = Collections.enumeration(
+    persons.stream()
+        .map(Person::getName)
+        .collect(Collectors.toList())
+);
+
+
+148. Collecting to JSON array:
+
+JsonArray jsonArray = persons.stream()
+    .map(p -> Json.createObjectBuilder()
+        .add("name", p.getName())
+        .add("age", p.getAge())
+        .build())
+    .collect(JsonCollectors.toJsonArray());
+
+
+149. Collecting to XML:
+
+String xml = persons.stream()
+    .map(p -> String.format("<person><name>%s</name><age>%d</age></person>", 
+        p.getName(), p.getAge()))
+    .collect(Collectors.joining("", "<people>", "</people>"));
+
+
+150. Collecting to properties:
+
+Properties props = persons.stream()
+    .collect(Properties::new,
+        (p, person) -> p.setProperty(person.getName(), String.valueOf(person.getAge())),
+        Properties::putAll);
+
+
+## Specialized Operations (151-200)
+
+151. Stream of bytes:
+
+List<Byte> bytes = ByteStream.of(1, 2, 3, 4, 5)
+    .boxed()
+    .collect(Collectors.toList());
+
+
+152. Stream of shorts:
+
+List<Short> shorts = IntStream.range(0, 10)
+    .mapToObj(i -> (short)i)
+    .collect(Collectors.toList());
+
+
+153. Stream of floats:
+
+List<Float> floats = IntStream.range(0, 10)
+    .mapToObj(i -> (float)i)
+    .collect(Collectors.toList());
+
+
+154. Stream of booleans:
+
+List<Boolean> booleans = IntStream.range(0, 10)
+    .mapToObj(i -> i % 2 == 0)
+    .collect(Collectors.toList());
+
+
+155. Stream of characters:
+
+List<Character> chars = IntStream.range('a', 'z')
+    .mapToObj(i -> (char)i)
+    .collect(Collectors.toList());
+
+
+156. Stream of big integers:
+
+List<BigInteger> bigInts = IntStream.range(0, 10)
+    .mapToObj(BigInteger::valueOf)
+    .collect(Collectors.toList());
+
+
+157. Stream of big decimals:
+
+List<BigDecimal> bigDecimals = IntStream.range(0, 10)
+    .mapToObj(BigDecimal::valueOf)
+    .collect(Collectors.toList());
+
+
+158. Stream of dates:
+
+List<LocalDate> dates = Stream.iterate(LocalDate.now(), date -> date.plusDays(1))
+    .limit(10)
+    .collect(Collectors.toList());
+
+
+159. Stream of date times:
+
+List<LocalDateTime> dateTimes = Stream.iterate(
+    LocalDateTime.now(), dt -> dt.plusHours(1))
+    .limit(24)
+    .collect(Collectors.toList());
+
+
+160. Stream of durations:
+
+List<Duration> durations = IntStream.range(0, 10)
+    .mapToObj(i -> Duration.ofMinutes(i))
+    .collect(Collectors.toList());
+
+
+161. Stream of periods:
+
+List<Period> periods = IntStream.range(0, 10)
+    .mapToObj(i -> Period.ofDays(i))
+    .collect(Collectors.toList());
+
+
+162. Stream of UUIDs:
+
+List<UUID> uuids = Stream.generate(UUID::randomUUID)
+    .limit(10)
+    .collect(Collectors.toList());
+
+
+163. Stream of currency:
+
+List<Currency> currencies = Currency.getAvailableCurrencies().stream()
+    .collect(Collectors.toList());
+
+
+164. Stream of locales:
+
+List<Locale> locales = Arrays.stream(Locale.getAvailableLocales())
+    .collect(Collectors.toList());
+
+
+165. Stream of time zones:
+
+List<TimeZone> timeZones = Arrays.stream(TimeZone.getAvailableIDs())
+    .map(TimeZone::getTimeZone)
+    .collect(Collectors.toList());
+
+
+166. Stream of file attributes:
+
+List<BasicFileAttributes> attrs = Files.list(Paths.get("."))
+    .map(p -> {
+        try {
+            return Files.readAttributes(p, BasicFileAttributes.class);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    })
+    .collect(Collectors.toList());
+
+
+167. Stream of method references:
+
+List<Method> methods = Arrays.stream(String.class.getMethods())
+    .collect(Collectors.toList());
+
+
+168. Stream of annotations:
+
+List<Annotation> annotations = Arrays.stream(MyClass.class.getAnnotations())
+    .collect(Collectors.toList());
+
+
+169. Stream of fields:
+
+List<Field> fields = Arrays.stream(MyClass.class.getDeclaredFields())
+    .collect(Collectors.toList());
+
+
+170. Stream of constructors:
+
+List<Constructor<?>> constructors = Arrays.stream(MyClass.class.getConstructors())
+    .collect(Collectors.toList());
+
+
+171. Stream of stack traces:
+
+List<StackTraceElement> stackTrace = Arrays.stream(new Exception().getStackTrace())
+    .collect(Collectors.toList());
+
+
+172. Stream of threads:
+
+List<Thread> threads = Thread.getAllStackTraces().keySet().stream()
+    .collect(Collectors.toList());
+
+
+173. Stream of processes:
+
+List<ProcessHandle> processes = ProcessHandle.allProcesses()
+    .collect(Collectors.toList());
+
+
+174. Stream of network interfaces:
+
+List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces())
+    .stream()
+    .collect(Collectors.toList());
+
+
+175. Stream of inet addresses:
+
+List<InetAddress> addresses = Stream.of(InetAddress.getAllByName("localhost"))
+    .collect(Collectors.toList());
+
+
+176. Stream of certificates:
+
+List<Certificate> certs = Arrays.stream(keyStore.aliases())
+    .map(a -> {
+        try {
+            return keyStore.getCertificate(a);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    })
+    .collect(Collectors.toList());
+
+
+177. Stream of principals:
+
+List<Principal> principals = subject.getPrincipals().stream()
+    .collect(Collectors.toList());
+
+
+178. Stream of permissions:
+
+List<Permission> permissions = policy.getPermissions(domain).elements().asIterator()
+    .stream()
+    .collect(Collectors.toList());
+
+
+179. Stream of MBeans:
+
+List<ObjectName> mbeans = mbeanServer.queryNames(null, null).stream()
+    .collect(Collectors.toList());
+
+
+180. Stream of JNDI contexts:
+
+List<Context> contexts = new InitialContext().listBindings("").asIterator()
+    .stream()
+    .map(b -> (Context)b.getObject())
+    .collect(Collectors.toList());
+
+
+181. Stream of database metadata:
+
+List<String> tables = databaseMetaData.getTables(null, null, "%", null).asIterator()
+    .stream()
+    .map(rs -> {
+        try {
+            return rs.getString("TABLE_NAME");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    })
+    .collect(Collectors.toList());
+
+
+182. Stream of result set:
+
+List<Map<String, Object>> rows = StreamSupport.stream(
+    Spliterators.spliteratorUnknownSize(
+        new ResultSetIterator(resultSet), 
+        Spliterator.ORDERED), false)
+    .collect(Collectors.toList());
+
+
+183. Stream of JPA entities:
+
+List<Person> jpaPersons = entityManager.createQuery("SELECT p FROM Person p", Person.class)
+    .getResultStream()
+    .collect(Collectors.toList());
+
+
+184. Stream of JPA tuple:
+
+List<String> names = entityManager.createQuery(
+    "SELECT p.name FROM Person p", Tuple.class)
+    .getResultStream()
+    .map(t -> t.get(0, String.class))
+    .collect(Collectors.toList());
+
+
+185. Stream of JPA criteria:
+
+CriteriaQuery<Person> query = criteriaBuilder.createQuery(Person.class);
+Root<Person> root = query.from(Person.class);
+List<Person> persons = entityManager.createQuery(query)
+    .getResultStream()
+    .collect(Collectors.toList());
+
+
+186. Stream of JPA native query:
+
+List<Person> persons = entityManager.createNativeQuery("SELECT * FROM persons", Person.class)
+    .getResultStream()
+    .collect(Collectors.toList());
+
+
+187. Stream of JPA stored procedure:
+
+StoredProcedureQuery query = entityManager.createStoredProcedureQuery("get_persons");
+List<Person> persons = query.getResultStream()
+    .map(o -> (Person)o)
+    .collect(Collectors.toList());
+
+
+188. Stream of JDO query:
+
+List<Person> persons = persistenceManager.newQuery(Person.class).executeList().stream()
+    .collect(Collectors.toList());
+
+
+189. Stream of Hibernate query:
+
+List<Person> persons = session.createQuery("from Person", Person.class)
+    .stream()
+    .collect(Collectors.toList());
+
+
+190. Stream of Hibernate criteria:
+
+List<Person> persons = session.createCriteria(Person.class)
+    .list().stream()
+    .collect(Collectors.toList());
+
+
+191. Stream of Spring Data JPA:
+
+List<Person> persons = personRepository.findAll().stream()
+    .collect(Collectors.toList());
+
+
+192. Stream of Spring Data Mongo:
+
+List<Person> persons = mongoTemplate.findAll(Person.class).stream()
+    .collect(Collectors.toList());
+
+
+193. Stream of Spring Data JDBC:
+
+List<Person> persons = jdbcTemplate.query("SELECT * FROM persons", 
+    (rs, rowNum) -> new Person(rs.getString("name"), rs.getInt("age")))
+    .stream()
+    .collect(Collectors.toList());
+
+
+194. Stream of Spring Data Redis:
+
+List<Person> persons = redisTemplate.opsForValue().multiGet(redisTemplate.keys("*"))
+    .stream()
+    .filter(Objects::nonNull)
+    .map(o -> (Person)o)
+    .collect(Collectors.toList());
+
+
+195. Stream of Spring Batch:
+
+List<Person> persons = jobExplorer.getJobInstances("personJob", 0, 100).stream()
+    .flatMap(ji -> jobExplorer.getJobExecutions(ji).stream())
+    .flatMap(je -> stepExecutionDao.findStepExecutions(je).stream())
+    .flatMap(se -> chunkContextDao.get(se).getItems().stream())
+    .filter(item -> item instanceof Person)
+    .map(item -> (Person)item)
+    .collect(Collectors.toList());
+
+
+196. Stream of Spring Integration:
+
+List<Message<?>> messages = IntegrationFlows.from("inputChannel")
+    .handle(m -> System.out.println(m.getPayload()))
+    .toReactivePublisher()
+    .toStream()
+    .collect(Collectors.toList());
+
+
+197. Stream of Spring WebFlux:
+
+List<Person> persons = webClient.get()
+    .uri("/persons")
+    .retrieve()
+    .bodyToFlux(Person.class)
+    .toStream()
+    .collect(Collectors.toList());
+
+
+198. Stream of Spring MVC:
+
+List<Person> persons = mockMvc.perform(get("/persons"))
+    .andReturn()
+    .getResponse()
+    .getContentAsString()
+    .lines()
+    .map(line -> objectMapper.readValue(line, Person.class))
+    .collect(Collectors.toList());
+
+
+199. Stream of Spring Cloud Stream:
+
+List<Person> persons = streamBridge.send("persons-out-0", person)
+    .thenMany(consumer.receive())
+    .toStream()
+    .map(m -> (Person)m.getPayload())
+    .collect(Collectors.toList());
+
+
+200. Stream of Spring Security:
+List<GrantedAuthority> authorities = SecurityContextHolder.getContext()
+    .getAuthentication()
+    .getAuthorities()
+    .stream()
+    .collect(Collectors.toList());
+
+
+}

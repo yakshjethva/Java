@@ -1,0 +1,35 @@
+version: '3'
+services:
+  java-crud-app:
+    container_name: java_api
+    image: midejoe/java-api:2.0  # Make sure your image is configured for H2
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_H2_CONSOLE_ENABLED=true
+      - SPRING_H2_CONSOLE_PATH=/h2-console
+    # No depends_on needed as H2 runs in-memory within the same container
+
+
+#services:
+#  my-sql-server:
+#    container_name: my-sql-server
+#    image: midejoe/java-api:mysql
+#    ports:
+#      - 3306:3306
+#
+#  java-crud-app:
+#    container_name: java_api
+#    image: midejoe/java-api:2.0
+#    ports:
+#      - 8080:8080
+#    environment:
+#      - DATABASE_URL=jdbc:mysql://my-sql-server:3306/store_database
+#      - DATABASE_USERNAME=dbuser
+#      - DATABASE_PASSWORD=@YourPassword#
+#    depends_on:
+#      - my-sql-server
