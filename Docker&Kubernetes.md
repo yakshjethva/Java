@@ -6,7 +6,7 @@ Absolutely! Here's a **comprehensive, developer-friendly Kubernetes and Docker c
 
 ### 🔹 Image & Container Management
 
-
+```bash
 docker build -t myapp .             # Build Docker image
 docker images                       # List local images
 docker rmi image_id                 # Remove image
@@ -16,28 +16,28 @@ docker ps                           # List running containers
 docker stop container_id            # Stop a container
 docker rm container_id              # Remove container
 
-docker exec -it container_id    # Access container shell
+docker exec -it container_id bash   # Access container shell
 docker logs container_id            # View container logs
-
+```
 
 ### 🔹 Dockerfile (Java App Example)
 
-Dockerfile
+```Dockerfile
 FROM openjdk:17
 WORKDIR /app
 COPY target/myapp.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
+```
 
 ### 🔹 Docker Volumes & Networks
 
-
+```bash
 docker volume create myvolume
 docker network create mynetwork
 
 docker run -v myvolume:/data myapp
 docker run --network=mynetwork myapp
-
+```
 
 ---
 
@@ -45,7 +45,7 @@ docker run --network=mynetwork myapp
 
 #### docker-compose.yml
 
-yaml
+```yaml
 version: '3'
 services:
   java-app:
@@ -64,14 +64,14 @@ services:
       MYSQL_DATABASE: mydb
     ports:
       - 3306:3306
+```
 
-
-
+```bash
 docker-compose up -d
 docker-compose down
 docker-compose logs -f
-docker-compose exec java-app 
-
+docker-compose exec java-app bash
+```
 
 ---
 
@@ -79,15 +79,15 @@ docker-compose exec java-app
 
 ### 🔹 Setup & Access
 
-
+```bash
 kubectl config use-context minikube       # Switch context
 kubectl cluster-info                      # View cluster info
 kubectl get all                           # View all resources
-
+```
 
 ### 🔹 Deployments & Pods
 
-
+```bash
 kubectl create deployment myapp --image=myapp:1.0
 kubectl get deployments
 kubectl describe deployment myapp
@@ -95,12 +95,12 @@ kubectl delete deployment myapp
 
 kubectl get pods
 kubectl logs pod-name
-kubectl exec -it pod-name -- 
-
+kubectl exec -it pod-name -- bash
+```
 
 ### 🔹 YAML: Deployment Example
 
-yaml
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -120,17 +120,17 @@ spec:
         image: midejoe/java-api:2.0
         ports:
         - containerPort: 8080
+```
 
-
-
+```bash
 kubectl apply -f deployment.yaml
-
+```
 
 ---
 
 ### 🔹 Service (NodePort)
 
-yaml
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -144,18 +144,18 @@ spec:
       targetPort: 8080
       nodePort: 30080
   type: NodePort
+```
 
-
-
+```bash
 kubectl apply -f service.yaml
 kubectl get svc
-
+```
 
 ---
 
 ### 🔹 ConfigMap & Secrets
 
-yaml
+```yaml
 # configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -163,9 +163,9 @@ metadata:
   name: app-config
 data:
   SPRING_PROFILES_ACTIVE: dev
+```
 
-
-yaml
+```yaml
 # secret.yaml
 apiVersion: v1
 kind: Secret
@@ -175,18 +175,18 @@ type: Opaque
 data:
   username: YWRtaW4=       # base64 for 'admin'
   password: cGFzc3dvcmQ=   # base64 for 'password'
+```
 
-
-
+```bash
 kubectl apply -f configmap.yaml
 kubectl apply -f secret.yaml
-
+```
 
 ---
 
 ### 🔹 Ingress (Expose via domain)
 
-yaml
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -205,25 +205,25 @@ spec:
             name: java-service
             port:
               number: 80
-
+```
 
 ---
 
 ### 🔹 Scaling, Update, Rollback
 
-
+```bash
 kubectl scale deployment java-app --replicas=3
 
 kubectl set image deployment/java-app java-container=midejoe/java-api:2.1
 kubectl rollout status deployment java-app
 kubectl rollout undo deployment java-app
-
+```
 
 ---
 
 ### 🔹 Health Checks
 
-yaml
+```yaml
 livenessProbe:
   httpGet:
     path: /actuator/health
@@ -237,25 +237,25 @@ readinessProbe:
     port: 8080
   initialDelaySeconds: 5
   periodSeconds: 5
-
+```
 
 ---
 
 ### 🔹 Port Forward (Testing Locally)
 
-
+```bash
 kubectl port-forward svc/java-service 8080:80
-
+```
 
 ---
 
 ### 🔹 Minikube / Kind
 
-
+```bash
 minikube start
 kubectl apply -f .  # Apply all YAMLs
 minikube dashboard  # GUI
-
+```
 
 ---
 
